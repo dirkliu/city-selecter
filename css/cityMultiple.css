@@ -33,14 +33,6 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
-
-#cyy-cityMultiple #cyy-cities-list ul{
-    margin-left:15px;
-}
-
-#cyy-cityMultiple #cyy-cities-list ul >li{
-    border-bottom: none;
-}
 #cyy-cityMultiple ul {
     margin: 0px;
     padding: 0px;
@@ -78,10 +70,6 @@
     width: 201px;
     float: left;
 }
-
-#cyy-cityMultiple #cyy-selected .icoF{
-    margin:0;
-}
 #cyy-cityMultiple #cyy-selected .cyy-title {
     border-left: 1px solid #fff;
 }
@@ -99,16 +87,10 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
-
-#cyy-cityMultiple #cyy-selected-list .cyy-city-delete .icoF{
-    font-size:12px;
-    margin:0;
-}
 #cyy-cityMultiple #cyy-selected-list>ul>li {
     float: none;
     white-space: nowrap;
     width: 175px;
-    margin-left:15px;
 }
 #cyy-selected-list>ul .city-s {
     font-weight: bold;

@@ -1,0 +1,28 @@
+{
+  "name": "city-selecter",
+  "version": "1.0.0",
+  "description": "A selector of Chinse cities,base on jquery.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dirkliu/city-selecter.git"
+  },
+  "keywords": [
+    "city",
+    "selector",
+    "city-selector",
+    "jquery-plugin"
+  ],
+  "author": "Jason 7",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dirkliu/city-selecter/issues"
+  },
+  "homepage": "https://github.com/dirkliu/city-selecter#readme",
+  "devDependencies": {
+    "jquery": "^3.1.1"
+  }
+}
