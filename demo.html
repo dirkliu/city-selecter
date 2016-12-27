@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
     <title>城市选择器测试页面</title>
-    <link rel="stylesheet" type="text/css" href="./css/cityMultiple.css"/>
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="./js/jquery.cityMultiple.js"></script>
+    <script src="./node_modules/angular/angular.js"></script>
 </head>
-<body>
-  <div id="city-selector"></div>
-  <script>
-      $('#city-selector').cityMultiple();
-  </script>
+<body ng-controller="AppCtrl" ng-cloak>
+<h1 class="wrap">{{title}}</h1>
+<div lmb-city-selector></div>
+<script src="./citySelector.js"></script>
+<script src="./app.js"></script>
 </body>
 </html>
