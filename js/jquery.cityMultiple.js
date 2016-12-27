@@ -1,5 +1,5 @@
-(function($) {
-    $.fn.cityMultiple = function() {
+(function ($) {
+    $.fn.cityMultiple = function () {
 
         var self = this;
         var html = '<div id="cyy-cityMultiple">' + '<div id="cyy-cities">' + '<div class="cyy-title">省/市</div>' + '<div id="cyy-cities-list">' + '<ul>';
@@ -23,7 +23,7 @@
         html = $(html);
         self.html(html);
 
-        html.find(".city-item .city-checkbox").click(function() {
+        html.find(".city-item .city-checkbox").click(function () {
             var cityItem = $(this).parent().find('ul input');
             if ($(this).prop("checked")) {
                 cityItem.prop("checked", true);
@@ -32,7 +32,7 @@
             }
             setSelectCity(getSelectedCity());
         });
-        html.find(".cyy-items .city-s").change(function() {
+        html.find(".cyy-items .city-s").change(function () {
             var parentCity = $(this).parents(".city-item").children('input');
             var checkedNum = $(this).parents(".city-item").find('.city-s:checked');
             if (checkedNum.length > 0) {
@@ -42,15 +42,15 @@
             }
             setSelectCity(getSelectedCity());
         });
-        html.find(".city-item").mouseover(function() {
+        html.find(".city-item").mouseover(function () {
             $(this).parent().find('ul').hide();
             $(this).find('ul').show();
         });
-        html.find(".city-item ul").mouseout(function() {
+        html.find(".city-item ul").mouseout(function () {
             $(this).hide();
         });
 
-        html.delegate('.city-switch', 'click', function(event) {
+        html.delegate('.city-switch', 'click', function (event) {
             var parentLi = $(this).parent();
             if (parentLi.hasClass("cyy-flod-close")) {
                 parentLi.removeClass("cyy-flod-close");
@@ -63,7 +63,7 @@
             }
         });
         /*删除选择的城市*/
-        html.delegate('.city-delete', 'click', function(event) {
+        html.delegate('.city-delete', 'click', function (event) {
             var parentLi = $(this).parent();
             var city = $(this).attr("city-data").split("_");
             var checked1 = html.find('input[data-city=' + city[0] + ']');
@@ -80,7 +80,7 @@
             }
             parentLi.remove();
         });
-        html.find("#cyy-allDelete").click(function() {
+        html.find("#cyy-allDelete").click(function () {
             $("#cyy-selected-list>ul").html("");
             html.find("input").prop('checked', false);
         });
@@ -128,10 +128,11 @@
             }
             return cities;
         }
+
         /*获取已选择城市对象*/
         function getSelectedCity() {
             var selectedCity = {};
-            html.find(".city-item").each(function(index, val) {
+            html.find(".city-item").each(function (index, val) {
                 var selectedCheckbox = $(this).children('input');
                 if (selectedCheckbox.prop('checked')) {
                     var selectedCItyS = $(this).find('ul input:checked');
@@ -139,7 +140,7 @@
                     if (selectedCity[pCity] === undefined) {
                         selectedCity[pCity] = [];
                     }
-                    selectedCItyS.each(function(index, city) {
+                    selectedCItyS.each(function (index, city) {
                         selectedCity[pCity].push($(this).attr("data-city-s"));
                     });
                 }
@@ -171,7 +172,7 @@
             cities['重庆'] = ['重庆市'];
             cities['澳门'] = ['澳门'];
             cities['香港'] = ['香港'];
-            cities['台湾'] = ['台北市','基隆市','高雄市','台中','台南','新北市','新竹市','嘉义市'];
+            cities['台湾'] = ['台北市', '基隆市', '高雄市', '台中', '台南', '新北市', '新竹市', '嘉义市'];
             cities['安徽省'] = ['安庆市', ' 蚌埠市', ' 亳州市', '巢湖市', '池州市', '滁州市', '阜阳市', '合肥市', '淮北市', '淮南市', '黄山市', '六安市', '马鞍山市', '铜陵市', '芜湖市', '宿州市', '宣城市'];
             cities['福建省'] = ['福州市', '龙岩市', '南平市', '宁德市', '莆田市', '泉州市', '三明市', '厦门市', '漳州市'];
             cities['甘肃省'] = ['白银市', '定西市', '嘉峪关市', '金昌市', '酒泉市', '兰州市', '临夏回族自治州', '陇南市', '平凉市', '庆阳市', '天水市', '武威市', '张掖市', '甘南市'];
@@ -203,7 +204,7 @@
         }
 
         return {
-            get: function() {
+            get: function () {
                 return getSelectedCityArray();
             },
             set: setInit
