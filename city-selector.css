@@ -1,0 +1,43 @@
+.lmb-city-selector ul{
+    padding:0;
+    list-style: none;
+}
+.lmb-city-selector .region-list{
+    position: relative;
+}
+
+.lmb-city-selector .region-list >li{
+    display: inline-block;
+    width:100px;
+    padding:0;
+    text-align: center;
+    margin-bottom:1px;
+}
+
+.lmb-city-selector .region-list >li >button{
+    padding: 0;
+    line-height: 30px;
+    width: 98px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.lmb-city-selector .city-list {
+    position: absolute;
+    background-color: #fff;
+    width:100%;
+    left: 0;
+    z-index:2;
+    border:1px solid #ddd;
+    border-top:0;
+    box-sizing: border-box;
+    padding:10px 0;
+}
+
+.lmb-city-selector .city-list >li{
+    display: inline-block;
+    font-size:13px;
+    line-height: 30px;
+    padding-right:10px;
+}
