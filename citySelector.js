@@ -111,8 +111,8 @@ angular.module('LmbCityModule', []).factory('Regions', [function () {
         replace: true,
         template: '<div class="lmb-city-selector">' +
         '<ul class="region-list">' +
-        '<li ng-repeat="region in regions"><button type="button" ng-click="onShowCities(this)">{{region.name}}</button>' +
-        '<ul class="city-list" ng-if="region.cities" ng-show="expand">' +
+        '<li ng-repeat="region in regions"><button type="button" ng-click="onToggle(region)">{{region.name}}</button>' +
+        '<ul class="city-list" ng-if="region.cities" ng-show="region.expand">' +
         '<li ng-repeat="city in region.cities"><label><input type="checkbox"/>{{city}}</label></li>' +
         '</ul>' +
         '</li>' +
@@ -121,8 +121,13 @@ angular.module('LmbCityModule', []).factory('Regions', [function () {
         link: function (scope, elem, attr) {
             //console.log('Cities：', Cities);
             scope.regions = Regions;
-            scope.onShowCities = function (_scope) {
-                _scope.expand=!_scope.expand;
+            scope.onToggle = function (region) {
+                region.expand = !region.expand;
+                if (region.expand) {
+                    angular.forEach(scope.regions, function (value, key) {
+                            value.name!==region.name && (value.expand=false);
+                    });
+                }
             }
         }
     }

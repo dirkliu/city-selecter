@@ -23,6 +23,10 @@
     border: 1px solid #ccc;
 }
 
+.lmb-city-selector .region-list >li >button:focus{
+    outline:none;
+}
+
 .lmb-city-selector .city-list {
     position: absolute;
     background-color: #fff;
