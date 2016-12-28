@@ -1,7 +1,6 @@
-cityMultiple
-============
+# city-selector
+多省市选择器
 
-省市多选插件
-
-通过选取，可以同时获得多个城市的集合。
-###Documentation###
+### 运行
+ * 命令行中运行 ` npm install`
+ * 在浏览器中打开demo文件
