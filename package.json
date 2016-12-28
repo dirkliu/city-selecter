@@ -22,7 +22,11 @@
     "url": "https://github.com/dirkliu/city-selecter/issues"
   },
   "homepage": "https://github.com/dirkliu/city-selecter#readme",
-  "devDependencies": {
-    "jquery": "^3.1.1"
+  "devDependencies": {},
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-animate": "1.5.8",
+    "angular-ui-bootstrap": "2.3.2",
+    "jquery": "3.1.1"
   }
 }
