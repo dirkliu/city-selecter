@@ -1,56 +1,61 @@
-.lmb-city-selector ul{
-    padding:0;
+.lmb-city-selector ul {
+    padding: 0;
     list-style: none;
 }
-.lmb-city-selector .region-list{
-    color:#333;
+
+.lmb-city-selector .region-list {
+    color: #333;
     position: relative;
 }
 
-.lmb-city-selector .region-list >li{
+.lmb-city-selector .region-list > li {
     display: inline-block;
-    width:100px;
-    padding:0;
+    width: 100px;
+    padding: 0;
     text-align: center;
-    margin-bottom:1px;
+    margin-bottom: 1px;
 }
 
-.lmb-city-selector .region-list >li >button{
+.lmb-city-selector .region-list > li > button {
     padding: 0;
     line-height: 30px;
     width: 98px;
     cursor: pointer;
     background-color: #fff;
     border: 1px solid #ccc;
-    color:#333;
+    color: #333;
 }
 
-.lmb-city-selector .region-list >li >button.active{
+.lmb-city-selector .region-list > li > button.active {
     background-color: #4E7FE1;
     border-color: #386fdd;
-    color:#fff;
+    color: #fff;
 }
 
-.lmb-city-selector .region-list >li >button:focus{
-    outline:none;
+.lmb-city-selector .region-list > li > button:focus {
+    outline: none;
 }
 
-.lmb-city-selector .city-list {
+.lmb-city-selector .city-check-box {
     position: absolute;
     background-color: #eee;
-    width:100%;
+    width: 100%;
     left: 0;
-    z-index:2;
+    z-index: 2;
     box-sizing: border-box;
-    padding:10px 0;
+    padding: 10px 0;
     text-align: left;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    font-size: 13px;
 }
 
-.lmb-city-selector .city-list>ul >li{
+.lmb-city-selector .city-check-box > ul > li {
     display: inline-block;
-    font-size:13px;
     line-height: 30px;
-    padding-right:10px;
+    padding-right: 10px;
+}
+
+.lmb-city-selector .city-check-box .check-all, .lmb-city-selector .city-check-box > ul {
+    margin-left: 15px;
 }

@@ -105,43 +105,89 @@ angular.module('LmbCityModule', []).factory('Regions', [function () {
             cities: ['台北市', '基隆市', '高雄市', '台中', '台南', '新北市', '新竹市', '嘉义市']
         }
     ]
-}]).directive('lmbCitySelector', ['$document','Regions', function ($document,Regions) {
+}]).directive('lmbCitySelector', ['$document', 'Regions', function ($document, Regions) {
     return {
         restrict: 'A',
         replace: true,
         template: '<div class="lmb-city-selector">' +
         '<ul class="region-list">' +
-            '<li ng-repeat="region in regions"><button type="button" ng-click="onToggle(region)" ng-class="{active:region.expand}">{{region.name}}</button>' +
-                '<div class="city-list" ng-if="region.cities.length" ng-show="region.expand">' +
-                    '<div ng-show="region.cities.length>1"><label><input type="checkbox" ng-click="onCheckCity(city,region.name)"/>全选</label></div>' +
-                    '<ul>' +
-                        '<li ng-repeat="city in region.cities"><label><input type="checkbox" ng-click="onCheckCity(city,region.name)"/>{{city}}</label></li>' +
-                    '</ul>' +
-                '</div>' +
-            '</li>' +
+        '<li ng-repeat="region in regions"><button type="button" ng-click="onExpand(this)" ng-class="{active:expand}">{{region.name}}</button>' +
+        '<div class="city-check-box" ng-if="region.cities.length" ng-show="expand">' +
+        '<div class="check-all" ng-show="region.cities.length>1"><label><input type="checkbox" ng-model="checked" ng-click="onCheckAll(this)"/>全选</label></div>' +
+        '<ul class="city-list">' +
+        '<li ng-repeat="city in region.cities"><label><input type="checkbox" ng-click="onCheckCity(this,region.name)" ng-model="checked" ng-checked="checked"/>{{city}}</label></li>' +
         '</ul>' +
+        '</div>' +
+        '</li>' +
+        '</ul>' +
+        '<ul class="select-list"><li class="select-list" ng-repeat="selectRegion in selectList"><strong>{{selectRegion.name}}:</strong><span ng-repeat="selectCity in selectRegion.cities">{{selectCity}}  </span></li></ul>' +
         '</div>',
         link: function (scope, elem, attr) {
             scope.regions = Regions;
-            scope.onToggle = function (region) {
-                region.expand = !region.expand;
-                if (region.expand) {
-                    angular.forEach(scope.regions, function (value, key) {
-                        value.name !== region.name && (value.expand = false);
-                    });
+            scope.selectList = [];
+
+            scope.onExpand = function (_scope) {
+                _scope.expand = true;
+                var prev = _scope.$$prevSibling;
+                while (prev) {
+                    prev.expand = false;
+                    prev = prev.$$prevSibling;
+                }
+                var next = _scope.$$nextSibling;
+                while (next) {
+                    next.expand = false;
+                    next = next.$$nextSibling;
                 }
             }
 
-            scope.onCheckCity=function(city,region){
+            scope.onCheckAll = function (_scope) {
+                var startScope = _scope.$$childHead;
 
+                while (startScope) {
+                    startScope.checked = _scope.checked;
+                    scope.onCheckCity(startScope, _scope.region.name);
+                    startScope = startScope.$$nextSibling;
+                }
+            }
+
+            scope.onCheckCity = function (_scope, regionName) {
+                var region = _getSelectRegion(regionName);
+                if (_scope.checked) {
+                    if(region){
+                        region.cities.indexOf(_scope.city) === -1 && region.cities.push(_scope.city);
+                    }else{
+                        scope.selectList.push({
+                            name: regionName,
+                            cities: [_scope.city]
+                        });
+                    }
+                } else {
+                    if (region && region.cities.indexOf(_scope.city) > -1) {
+                        region.cities = region.cities.filter(function (city) {
+                            return city !== _scope.city;
+                        });
+                    }
+                }
+            }
+
+
+            function _getSelectRegion(regionName) {
+                var region;
+                for (var i = 0; i < scope.selectList.length; i++) {
+                    if (scope.selectList[i].name === regionName) {
+                        region = scope.selectList[i];
+                        break;
+                    }
+                }
+                return region;
             }
 
             function _isChildOf(child, parent) {
                 var parentNode;
-                if(child && parent) {
+                if (child && parent) {
                     parentNode = child.parentNode;
-                    while(parentNode) {
-                        if(parent === parentNode) {
+                    while (parentNode) {
+                        if (parent === parentNode) {
                             return true;
                         }
                         parentNode = parentNode.parentNode;
@@ -150,14 +196,18 @@ angular.module('LmbCityModule', []).factory('Regions', [function () {
                 return false;
             }
 
-            $document.on('click',function(event){
-                if(event.target!==elem && !_isChildOf(event.target,elem[0])){
-                    scope.$apply(function(){
-                        angular.forEach(scope.regions, function (value, key) {
-                            value.expand = false;
-                        });
+            $document.on('click', function (event) {
+                if (event.target !== elem && !_isChildOf(event.target, elem[0])) {
+                    scope.$apply(function () {
+                        var startScope = scope.$$childHead;
+
+                        while (startScope) {
+                            startScope.expand=false;
+                            startScope = startScope.$$nextSibling;
+                        }
+
                     });
-                }else{
+                } else {
                     event.stopPropagation();
                 }
             });
